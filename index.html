@@ -22,7 +22,7 @@
 <!-- <embed src="http://p3qhnc0eg.bkt.clouddn.com/U%20are%20so%20beautiful.mp3" width="0" height="0" loop="-1" autostart="true"> </embed> -->
 <!-- <embed src="https://www.joy127.com/url/109982.mp3" width="0" height="0" loop="-1" autostart="true"> </embed> -->
 
-<audio id="music" src="https://www.joy127.com/url/109982.mp3" preload="auto" loop></audio>
+<!-- <audio id="music" src="https://www.joy127.com/url/109982.mp3" preload="auto" loop></audio>
 <script>
     var music = document.getElementById('music');
     window.onload = function () {
@@ -31,9 +31,21 @@
         }, false);
         music.play();
     };
+</script> -->
+
+<audio style="display:none; height: 0" id="bg-music" preload="auto" src="https://www.joy127.com/url/109982.mp3" loop="loop"></audio>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('bg-music');
+            audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.play();
+        }, false);
+    }
+    audioAutoPlay();
+});
 </script>
-
-
 <div id="mainDiv">
 	<div id="content">
 		<div id="code">
@@ -125,6 +137,9 @@ if (!document.createElement('canvas').getContext) {
 	adjustCodePosition();
 	$("#code").typewriter();
 }
+
+
+
 </script>
 
 </div>
