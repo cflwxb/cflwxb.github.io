@@ -20,7 +20,18 @@
 
 <body>
 <!-- <embed src="http://p3qhnc0eg.bkt.clouddn.com/U%20are%20so%20beautiful.mp3" width="0" height="0" loop="-1" autostart="true"> </embed> -->
-<embed src="https://www.joy127.com/url/109982.mp3" width="0" height="0" loop="-1" autostart="true"> </embed>
+<!-- <embed src="https://www.joy127.com/url/109982.mp3" width="0" height="0" loop="-1" autostart="true"> </embed> -->
+
+<audio id="music" src="https://www.joy127.com/url/109982.mp3" preload="auto" loop></audio>
+<script>
+    var music = document.getElementById('music');
+    window.onload = function () {
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            music.play();
+        }, false);
+        music.play();
+    };
+</script>
 
 
 <div id="mainDiv">
