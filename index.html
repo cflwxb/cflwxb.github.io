@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>嗨！！</title>
+<title>点击页面播放</title>
 
 <style type="text/css">
 @font-face {
@@ -32,21 +32,42 @@
         music.play();
     };
 </script> -->
-
-<audio style="display:none; height: 0" id="bg-music" preload="auto" src="https://www.joy127.com/url/109982.mp3" loop="loop"></audio>
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-    function audioAutoPlay() {
-        var audio = document.getElementById('bg-music');
-            audio.play();
-        document.addEventListener("WeixinJSBridgeReady", function () {
-            audio.play();
-        }, false);
-    }
-    audioAutoPlay();
-});
-</script>
 <div id="mainDiv">
+	<!-- <audio style="display:none; height: 0" id="bg-music" preload="auto" src="https://www.joy127.com/url/109982.mp3" loop="loop"></audio>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		function audioAutoPlay() {
+			var audio = document.getElementById('bg-music');
+				audio.play();
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				audio.play();
+				}, false);
+			}
+			audioAutoPlay();
+		});
+	</script> -->
+	<div class="warning_voice" style="display: none;">
+		<audio controls>
+			<source src="https://www.joy127.com/url/109982.mp3" type="audio/mpeg" />
+		</audio>
+	</div>
+	<script>
+		const audioDom = document.querySelector('.warning_voice audio')
+		// 点击
+		document.addEventListener('click', () => {
+			audioDom.play();
+		});
+		
+		// 监听鼠标移动的事件
+		document.addEventListener('mousemove', () => {
+			audioDom.play();
+		});
+
+		audioDom.addEventListener('oncanplay', () => {
+			audioDom.play();
+		})
+	</script>
+
 	<div id="content">
 		<div id="code">
 
@@ -138,6 +159,8 @@ if (!document.createElement('canvas').getContext) {
 	$("#code").typewriter();
 }
 
+
+	
 
 
 </script>
