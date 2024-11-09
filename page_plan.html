@@ -1,16 +1,18 @@
-<div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-id: 'blog', // 可选。默认为 location.href
-owner: 'cflwxb',
-repo: 'cflwxb.github.io',
+<div id="gitalk-container"></div>
 
-oauth: {
-    client_id: 'Ov23liJNlVxoGmdqk8nW',
-    client_secret: '4e79f97a39e96be944251e42e13a75ba56a4905a',
-},
-})
-gitment.render('container')
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+const gitalk = new Gitalk({
+    clientID: 'Ov23liJNlVxoGmdqk8nW',
+    clientSecret: '4e79f97a39e96be944251e42e13a75ba56a4905a',
+    repo: 'cflwxb.github.io',      // The repository of store comments,
+    owner: 'cflwxb',
+    admin: ['cflwxb'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  
+  gitalk.render('gitalk-container')
 </script>
