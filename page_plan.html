@@ -1,0 +1,16 @@
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+id: 'blog', // 可选。默认为 location.href
+owner: 'cflwxb',
+repo: 'cflwxb.github.io',
+
+oauth: {
+    client_id: 'Ov23liJNlVxoGmdqk8nW',
+    client_secret: '4e79f97a39e96be944251e42e13a75ba56a4905a',
+},
+})
+gitment.render('container')
+</script>
