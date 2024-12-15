@@ -1,0 +1,246 @@
+<!-- photos.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片墙 - 我们的小窝</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .nav-link {
+            color: #ff69b4;
+        }
+        .nav-link:hover {
+            color: #ff1493;
+        }
+        .photo-card {
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .photo-card:hover {
+            transform: scale(1.05);
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        .photo-item:hover .photo-overlay {
+            transform: translateY(0);
+        }
+        .photo-filter {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        canvas {
+          border: 1px solid black;
+          background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">💑 我们的小窝</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="page_note.html">📝 我们的回忆</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="page_photo.html">📸 照片墙</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="page_plan.html">🎯 碎碎念</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link href="page_music.html">💕 音乐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link animate__animated animate__fadeIn" href="page_game.html">👍 游戏</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+      // 获取画布和绘图上下文
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+  
+      // 蛇的初始位置和大小等相关设置
+      const snake = [{
+          x: 10,
+          y: 10
+        }];
+      const blockSize = 10;
+      let direction = 'right';
+  
+      // 食物的初始位置
+      let food = {
+        x: Math.floor(Math.random() * (canvas.width / blockSize)) * blockSize,
+        y: Math.floor(Math.random() * (canvas.height / blockSize)) * blockSize
+      };
+  
+      // 绘制蛇的函数
+      function drawSnake() {
+        snake.forEach((segment) => {
+          ctx.fillStyle = 'green';
+          ctx.fillRect(segment.x, segment.y, blockSize, blockSize);
+        });
+      }
+  
+      // 绘制食物的函数
+      function drawFood() {
+        ctx.fillStyle ='red';
+        ctx.fillRect(food.x, food.y, blockSize, blockSize);
+      }
+  
+      // 移动蛇的函数
+      function moveSnake() {
+        const head = {
+          x: snake[0].x,
+          y: snake[0].y
+        };
+  
+        switch (direction) {
+          case 'right':
+            head.x += blockSize;
+            break;
+          case 'left':
+            head.x -= blockSize;
+            break;
+          case 'up':
+            head.y -= blockSize;
+            break;
+          case 'down':
+            head.y += blockSize;
+            break;
+        }
+  
+        snake.unshift(head);
+  
+        // 判断是否吃到食物
+        if (head.x === food.x && head.y === food.y) {
+          // 重新生成食物
+          food = {
+            x: Math.floor(Math.random() * (canvas.width / blockSize)) * blockSize,
+            y: Math.floor(Math.random() * (canvas.height / blockSize)) * blockSize
+          };
+        } else {
+          snake.pop();
+        }
+      }
+  
+      // 检查游戏结束条件（比如撞墙或者撞到自己）
+      function checkGameOver() {
+        const head = snake[0];
+        if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+          return true;
+        }
+  
+        for (let i = 1; i < snake.length; i++) {
+          if (head.x === snake[i].x && head.y === snake[i].y) {
+            return true;
+          }
+        }
+  
+        return false;
+      }
+  
+      // 主游戏循环
+      function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+        drawFood();
+        drawSnake();
+  
+        moveSnake();
+  
+        if (checkGameOver()) {
+          alert('游戏结束');
+          return;
+        }
+  
+        setTimeout(gameLoop, 100);
+      }
+  
+      // 监听键盘事件来改变蛇的方向
+      document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+          case 'ArrowRight':
+            if (direction!== 'left') {
+              direction = 'right';
+            }
+            break;
+          case 'ArrowLeft':
+            if (direction!== 'right') {
+              direction = 'left';
+            }
+            break;
+          case 'ArrowUp':
+            if (direction!== 'down') {
+              direction = 'up';
+            }
+            break;
+          case 'ArrowDown':
+            if (direction!== 'up') {
+              direction = 'down';
+            }
+            break;
+        }
+      });
+  
+      // 启动游戏循环
+      gameLoop();
+    </script>
+
+
+    <!-- 页脚 -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 我们的小窝 - 永远相爱 ❤️</p>
+        </div>
+    </footer>
+
+</body>
+</html>
