@@ -1,1 +1,248 @@
-<h1>TEST</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>点击页面播放</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+<style type="text/css">
+@font-face {
+	font-family: digit;
+	src: url('digital-7_mono.ttf') format("truetype");
+}
+
+		.video-btn {
+            background-color: pink;
+            border: none;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+        }
+
+        .video-btn:hover {
+            background-color: #45a049;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #videoPlayer {
+            width: 100%;
+            max-width: 640px;
+            display: block;
+            margin: 0 auto;
+        }
+</style>
+
+<link href="css/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/garden.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+
+</head>
+
+<body>
+<div id="mainDiv">
+	<div class="warning_voice" style="display: none;">
+		<audio controls>
+			<source src="https://www.joy127.com/url/109982.mp3" type="audio/mpeg" />
+
+		</audio>
+	</div>
+	<script>
+		const audioDom = document.querySelector('.warning_voice audio')
+		// 点击
+		document.addEventListener('click', () => {
+			audioDom.play();
+		});
+		
+		// 监听鼠标移动的事件
+		document.addEventListener('mousemove', () => {
+			//audioDom.play();
+		});
+
+		audioDom.addEventListener('oncanplay', () => {
+			//audioDom.play();
+		})
+	</script>
+
+	<div id="content">
+
+		<div id="code">
+
+			今天是<span id="Date"></span><br />
+			缘分是来得那么突然。</span><br />
+			既然相互喜欢，我们就要好好把握。</span><br />
+			曾经的点点滴滴，从相识到现在，从冷漠到关心，从谢绝到依赖，从生疏到相爱。</span><br />
+			不管面临多大的压力，不管前面的路如何崎岖。</span><br />
+			不管经历过什么，我仍坚信最浪漫的事，就是和另一半一起慢慢变老。</span><br />
+			希望这个计时会永远持续。</span><br />
+			<span class="keyword">接下来的每一天，都是我们的爱情纪念日。</span><br /><br />
+			
+            <hr /><br />
+			2024年2月26日  微信相识</span><br />
+			2024年3月2日  电影院相见</span><br />
+			2024年3月17日  博山相知</span><br />
+			2024年3月30日  我们确定了关系</span><br />
+			2024年3月31日  我牵着你的手</span><br />
+			2024年4月5日  我们的初吻</span><br />
+			2024年4月20日  电影没看完</span><br />
+			2024年4月23日  第一次看完电影</span><br />
+			2024年5月-2024年6月 腻腻歪歪~</span><br />
+			2024年7月6日   差不多100天啦</span><br />
+			闹了点矛盾 </span><br />
+			2024年8月23日   一个有意义的生日</span><br />
+			2024年10月13日  分手！</span><br />
+			2024年10月19日  和好了~</span><br />
+			2024年12月12日 wxb过生日</span><br />
+			</span><br />
+			<span class="keyword">…………</span><br /><br />
+			
+		</div>
+		<div id="loveHeart">
+			<canvas id="garden"></canvas>
+			<div id="words">
+				<div id="messages">
+					我们相恋的第...
+					<div id="elapseClock"></div>
+				</div>
+<!--			<div id="loveu">
+					<br/>
+					<div class="signature">- 钟先森</div>
+				</div>
+-->
+			</div>
+		</div>
+
+		<button class="video-btn">wxb和cfl的小视频</button>
+
+			<div id="videoModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<video poster="https://play.1001b.cn/b110605dvodtranscq1257837729/b5c8eabb1397757891408943890/coverBySnapshot/coverBySnapshot_20134_0.jpg" width="970"  src="small.mp4"  controls="controls">
+					</video>
+				</div>
+			</div>
+	
+			<script>
+				var modal = document.getElementById("videoModal");
+				var btn = document.getElementsByClassName("video-btn")[0];
+				var span = document.getElementsByClassName("close")[0];
+				var video = document.getElementById("videoPlayer");
+	
+				btn.onclick = function() {
+					modal.style.display = "block";
+					video.play();
+				}
+	
+				span.onclick = function() {
+					modal.style.display = "none";
+					video.pause();
+				}
+	
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+						video.pause();
+					}
+				}
+			</script>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+var date = new Date();   
+var year = date.getFullYear();    //获取当前年份   
+var mon = date.getMonth()+1;      //获取当前月份   
+var da = date.getDate();          //获取当前日   
+var day = date.getDay();          //获取当前星期几   
+var h = date.getHours();          //获取小时   
+var m = date.getMinutes();        //获取分钟   
+var s = date.getSeconds();        //获取秒   
+var d = document.getElementById('Date');    
+d.innerHTML=""+year+'年'+mon+'月'+da+'日。'; 
+
+
+var offsetX = $("#loveHeart").width() / 2;
+var offsetY = $("#loveHeart").height() / 2 - 55;
+var together = new Date();
+
+together.setFullYear(2024, 2, 30);//1.23；3.29
+together.setHours(21);
+together.setMinutes(7);
+together.setSeconds(0);
+together.setMilliseconds(0);
+
+if (!document.createElement('canvas').getContext) {
+	var msg = document.createElement("div");
+	msg.id = "errorMsg";
+	msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+	document.body.appendChild(msg);
+	$("#code").css("display", "none")
+	$("#copyright").css("position", "absolute");
+	$("#copyright").css("bottom", "10px");
+	document.execCommand("stop");
+} else {
+	setTimeout(function () {
+		startHeartAnimation();
+	}, 500);
+
+	timeElapse(together);
+	setInterval(function () {
+		timeElapse(together);
+	}, 50);
+
+	adjustCodePosition();
+	$("#code").typewriter();
+}
+
+
+	
+
+
+</script>
+
+</div>
+</body>
+</html>
