@@ -154,12 +154,18 @@
 			</div>
 		</div>
 
-		<button class="video-btn">wxb和cfl的小视频</button>
+		<button class="video-btn">wxb剪的小视频</button>
+		<a href="suisuinian.html">
+			<button class="video-btn">碎碎念</button>
+		  </a>
+		  <a href="zhaopianqiang.html">
+			<button class="video-btn">照片墙</button>
+		  </a>
 
 			<div id="videoModal" class="modal">
 				<div class="modal-content">
 					<span class="close">&times;</span>
-					<video poster="https://play.1001b.cn/b110605dvodtranscq1257837729/b5c8eabb1397757891408943890/coverBySnapshot/coverBySnapshot_20134_0.jpg" width="970"  src="small.mp4"  controls="controls">
+					<video poster="https://play.1001b.cn/b110605dvodtranscq1257837729/b5c8eabb1397757891408943890/coverBySnapshot/coverBySnapshot_20134_0.jpg" width="970"  src="./music/small.mp4"  controls="controls">
 					</video>
 				</div>
 			</div>
@@ -226,12 +232,12 @@ if (!document.createElement('canvas').getContext) {
 } else {
 	setTimeout(function () {
 		startHeartAnimation();
-	}, 500);
+	}, 25);
 
 	timeElapse(together);
 	setInterval(function () {
 		timeElapse(together);
-	}, 50);
+	}, 25);
 
 	adjustCodePosition();
 	$("#code").typewriter();

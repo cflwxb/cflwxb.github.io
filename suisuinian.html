@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浪漫微博网页</title>
+  <style>
+    /* 全局样式 */
+    body {
+      font-family: "Cursive", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      color: #4e342e;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* 微博容器样式 */
+    #weibo-container {
+      max-width: 600px;
+      width: 90%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    /* 每条微博样式 */
+    .weibo-item {
+      padding: 20px;
+      background-color: rgba(255, 245, 238, 0.8);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* 鼠标悬停在微博上的效果 */
+    .weibo-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 微博文本样式 */
+    .weibo-item p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #6d4c41;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="weibo-container">
+    <!-- 微博内容将在这里渲染 -->
+  </div>
+
+  <script>
+    // 获取微博容器元素
+    const weiboContainer = document.getElementById('weibo-container');
+
+    // 从 text_list.txt 文件中读取文本
+    fetch('text_list.txt')
+     .then(response => {
+        if (!response.ok) {
+          throw new Error('网络响应有问题');
+        }
+        return response.text();
+      })
+     .then(data => {
+        // 将文本按行分割成数组
+        const lines = data.split('\n').filter(line => line.trim()!== '');
+
+        // 遍历每行文本，创建微博元素并添加到容器中
+        lines.forEach(line => {
+          const weiboItem = document.createElement('div');
+          weiboItem.classList.add('weibo-item');
+          const weiboText = document.createElement('p');
+          weiboText.textContent = line;
+          weiboItem.appendChild(weiboText);
+          weiboContainer.appendChild(weiboItem);
+        });
+      })
+     .catch(error => {
+        console.error('读取文件时出错:', error);
+      });
+  </script>
+</body>
+
+</html>

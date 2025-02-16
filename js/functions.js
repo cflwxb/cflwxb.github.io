@@ -96,7 +96,7 @@ function startHeartAnimation() {
         if (b >= c.length) {
           clearInterval(e);
         }
-      }, 12);
+      }, 0.5);
     });
     return this;
   };
